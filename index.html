@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html ng-app="App">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Table Data</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="js/angular.min.js"></script>
+    <script src="js/script.js"></script>
+</head>
+<body>
+    <div class="holder">
+        <div class="container">
+            <form ng-controller="TableData as data" ng-submit="data.addNew()" class="form-horizontal col-md-3">
+                <p class="form-group">
+                    <input ng-model="data.name" required class="form-control" type="text" placeholder="First Name">
+                </p>
+                <p class="form-group">
+                    <input ng-model="data.secondName" required class="form-control" type="text" placeholder="Last Name">
+                </p>
+                <p class="form-group">
+                    <input ng-model="data.phone" required class="form-control" type="number" placeholder="Phone">
+                </p>
+                <p class="form-group">
+                    <input ng-model="data.gender" required name="gender" type="radio" value="male" /> male
+                    <input ng-model="data.gender" required name="gender" type="radio" value="female" /> female
+                </p>
+                <p class="form-group">
+                    <input ng-model="data.age" required class="form-control" type="number" placeholder="Age">
+                </p>
+                <p class="form-group">
+                    <input class="btn btn-primary"  type="submit" value="Add to table">
+                </p>
+            </form>
+            <div ng-controller="TableFunc as table" ng-show="table.rowData.length" class="table-holder col-md-9">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="col-md-1"><span ng-click="table.sortBy('name')">Name <i ng-show="table.type === 'name' && table.reverse" class="fa fa-chevron-up"></i><i ng-show="table.type === 'name' && !table.reverse" class="fa fa-chevron-down"></i></span></th>
+                            <th class="col-md-1"><span ng-click="table.sortBy('secondName')">Second Name <i ng-show="table.type === 'secondName' && table.reverse" class="fa fa-chevron-up"></i><i ng-show="table.type === 'secondName' && !table.reverse" class="fa fa-chevron-down"></i></span></th>
+                            <th class="col-md-1"><span ng-click="table.sortBy('phone')">Phone number <i ng-show="table.type === 'phone' && table.reverse" class="fa fa-chevron-up"></i><i ng-show="table.type === 'phone' && !table.reverse" class="fa fa-chevron-down"></i></span></th>
+                            <th class="col-md-1"><span ng-click="table.sortBy('gender')">Sex <i ng-show="table.type === 'gender' && table.reverse" class="fa fa-chevron-up"></i><i ng-show="table.type === 'gender' && !table.reverse" class="fa fa-chevron-down"></i></span></th>
+                            <th class="col-md-1"><span ng-click="table.sortBy('age')">Age <i ng-show="table.type === 'age' && table.reverse" class="fa fa-chevron-up"></i><i ng-show="table.type === 'age' && !table.reverse" class="fa fa-chevron-down"></i></span></th>
+                            <th class="col-md-1">Remove row</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="row in table.rowData | orderBy:table.type:table.reverse">
+                            <td class="col-md-1">{{row.name}}</td>
+                            <td class="col-md-1">{{row.secondName}}</td>
+                            <td class="col-md-1">{{row.phone}}</td>
+                            <td class="col-md-1">{{row.gender}}</td>
+                            <td class="col-md-1">{{row.age}}</td>
+                            <td class="col-md-1 remove-row"><i ng-click="table.removeData(row.id)" class="fa fa-times"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

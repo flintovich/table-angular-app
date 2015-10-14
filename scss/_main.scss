@@ -1,0 +1,23 @@
+.holder{
+  padding: 25px 0;
+}
+
+.table{
+  thead{
+    font-weight: bold;
+    color: #666;
+    span{
+      cursor: pointer;
+      i{
+        color: #000;
+      }
+    }
+  }
+  .remove-row{
+    text-align: center;
+    color: #cc0000;
+    i{
+      cursor: pointer;
+    }
+  }
+}
